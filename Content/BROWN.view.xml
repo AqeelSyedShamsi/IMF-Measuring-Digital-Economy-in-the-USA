@@ -1,0 +1,30 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+
+                     xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page>
+
+  <content>
+
+    <html:div style="font-size:120%;">The brown exponential smoothing model is suitable to model the time series with trend but without
+seasonality. In PAL, both non-adaptive and adaptive brown linear exponential smoothing are provided.<html:br></html:br>
+For non-adaptive brown exponential smoothing, the initialization and calculation phase for the simply smoothed value and doubly smoothed value for the given time period is performed. 
+<html:br></html:br>
+
+
+<html:b>Prerequisites</html:b>
+<html:p> ● No missing or null data in the inputs.<html:br></html:br>
+ ●  The data is numeric, not categorical.<html:br></html:br>
+
+</html:p>
+
+<html:b>Procedure Generation</html:b>
+<html:p> CALL SYS.AFLLANG_WRAPPER_PROCEDURE_CREATE (‘AFLPAL’, ‘BROWNEXPSMOOTH’, ‘schema_name’, 'procedure_name', signature_table);</html:p>
+
+</html:div>
+
+  </content>
+
+</Page>
+
+</mvc:View>
