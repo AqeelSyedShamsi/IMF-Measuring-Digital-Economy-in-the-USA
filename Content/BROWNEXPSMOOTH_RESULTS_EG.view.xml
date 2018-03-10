@@ -1,0 +1,56 @@
+<!-- this is a comment. in the next tag, the xmlns tags define namespaces,
+the name after of the equality signs being the name of the namespace. In
+the code below, we can use this name instead of the full path -->
+<mvc:View controllerName="content.BROWNEXPSMOOTH_RESULTS_EG"
+xmlns="sap.m"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns:table="sap.ui.table"
+xmlns:l="sap.ui.commons.layout"
+xmlns:html="http://www.w3.org/1999/xhtml">
+<!-- view content goes here -->
+<!-- this HTML paragraph is used as a spacer -->
+<html:p/>
+<!-- here we have the definition of the table.
+Next to different settings for the appearance
+and behavior of the table, we bind the endpoint
+/Sales of our data source to our rows -->
+<table:Table
+id="BROWNEXPSMOOTH_RESULTS_EG"
+visibleRowCount="10"
+selectionMode="Single"
+navigationMode="Paginator"
+editable="false"
+rows="{/BROWNEXPSMOOTH_RESULTS_EG}">
+<!-- this defines one column in the table. The property
+"sortProperty" defines the column of the data source on
+which the column will sort -->
+<table:Column sortProperty="Indicator">
+<table:label>
+<Label text="Indicator" design="Bold"/>
+</table:label>
+<table:template>
+<Label text="{Indicator}"/>
+</table:template>
+</table:Column>
+<table:Column sortProperty="ProducerPrices">
+<!-- the label is shown in the header of the table -->
+
+<table:label>
+<Label text="ProducerPrices" design="Bold"/>
+</table:label>
+<!-- for each column, a template is required which
+defines how how the data is visualized -->
+<table:template>
+<!-- this label defines the actual content (aka the
+rows) that are shown in the table. here, we bind the
+column CUSTOMER_NAME of the data source
+to this table column -->
+<Label text="{ProducerPrices}"/>
+</table:template>
+</table:Column>
+
+
+
+
+</table:Table>
+</mvc:View>
