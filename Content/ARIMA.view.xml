@@ -1,0 +1,36 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+
+                     xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page>
+
+  <content>
+
+    <html:div style="font-size:120%;">The auto regressive integrated moving average (ARIMA) algorithm is famous in econometrics, statistics and
+time series analysis. An ARIMA model can be written as ARIMA (p, d, q), where p refers to the auto regressive
+order, d refers to integrated order, and q refers to the moving average order. This algorithm helps you
+understand the time series data better and predict future data in the series.<html:br></html:br>
+The auto regressive integrated moving average with intervention (ARIMAX) algorithm is an extension for
+ARIMA. Compared with ARIMA, an ARIMAX model can not only get the internal relationship with former data,
+but also take external factor into consideration.<html:br></html:br>
+
+
+<html:b>Prerequisites</html:b>
+<html:p> ● No missing or null data in the inputs.<html:br></html:br>
+<html:b>ARIMA Model</html:b><html:br></html:br>
+An ARIMA model is a universalization of an auto regressive moving average (ARMA) model. The integrated
+part is mainly applied to induce stationary when data show evidence of non-stationary.<html:br></html:br>
+An ARIMA (p, d, q) model can be expressed as:<html:br></html:br>
+Φ(B)(1−B)d(Yt−c)=Θ(B)εt, t∈Z
+</html:p>
+
+<html:b>Procedure Generation</html:b>
+<html:p> CALL SYS.AFLLANG_WRAPPER_PROCEDURE_CREATE (‘AFLPAL’, ‘ARIMATRAIN’, ‘schema_name’, 'procedure_name', signature_table);</html:p>
+
+</html:div>
+
+  </content>
+
+</Page>
+
+</mvc:View>
