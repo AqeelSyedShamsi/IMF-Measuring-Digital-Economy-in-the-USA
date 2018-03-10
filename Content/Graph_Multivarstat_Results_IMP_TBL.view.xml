@@ -1,0 +1,251 @@
+<!-- this is a comment. In the next tag, the xmlns tags define
+namespaces, the name after of the equality signs being the
+name of the namespace. In the code below, we can use this
+name instead of the full path -->
+<mvc:View controllerName="content.Multivarstat_Results_IMP_TBL"
+xmlns="sap.m"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns:viz="sap.viz.ui5.controls"
+xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+xmlns:viz.data="sap.viz.ui5.data"
+xmlns:html="http://www.w3.org/1999/xhtml">
+<!-- view content goes here -->
+<!-- this HTML paragraph is used as a spacer -->
+<html:p/>
+<!-- This is the text that we want to show -->
+<!-- the vizFrame is a control to handle a variety of different
+ charts. The properties of the VizFrame itself only affect the
+ the frame of the chart. The property vizProperties is a json
+ object which holds the configuration for the actual chart -->
+<viz:VizFrame
+id="linechart"
+width="100%"
+height="800px"
+vizType="info/line"
+uiConfig="{
+applicationSet:'fiori'
+}"
+vizProperties="{
+plotArea:{dataLabel : {visible : true},
+dataPointSize : {
+min : 0,
+max : 4
+}
+},
+
+title: {
+alignment :'left',
+visible : true,
+text : 'Profit and Revenue by City'
+}
+}">
+
+<!-- the chart requires a flattened dataset with
+dimensions and measurement data. Here we define the
+different components of the dataset based on the
+model that we're binding to the view over the data
+property -->
+<viz:dataset>
+<viz.data:FlattenedDataset id="flattenedData" data="{/Multivarstat_Results_IMP_TBL}">
+<viz.data:dimensions>
+<viz.data:DimensionDefinition name="ID" value="{ID}" />
+</viz.data:dimensions>
+<viz.data:measures>
+<viz.data:MeasureDefinition name="Advanced_Economies" value="{Advanced_Economies}" />
+<viz.data:MeasureDefinition name="Euro_area" value="{Euro_area}" />
+<viz.data:MeasureDefinition name="Austria" value="{Austria}" />
+<viz.data:MeasureDefinition name="Belgium" value="{Belgium}" />
+<viz.data:MeasureDefinition name="Cyprus" value="{Cyprus}" />
+<viz.data:MeasureDefinition name="Estonia" value="{Estonia}" />
+<viz.data:MeasureDefinition name="Finland" value="{Finland}" />
+<viz.data:MeasureDefinition name="France" value="{France}" />
+<viz.data:MeasureDefinition name="Germany" value="{Germany}" />
+<viz.data:MeasureDefinition name="Greece" value="{Greece}" />
+<viz.data:MeasureDefinition name="Ireland" value="{Ireland}" />
+<viz.data:MeasureDefinition name="Italy" value="{Italy}" />
+<viz.data:MeasureDefinition name="Latvia" value="{Latvia}" />
+<viz.data:MeasureDefinition name="Lithuania" value="{Lithuania}" />
+<viz.data:MeasureDefinition name="Luxembourg" value="{Luxembourg}" />
+<viz.data:MeasureDefinition name="Malta" value="{Malta}" />
+<viz.data:MeasureDefinition name="Netherlands" value="{Netherlands}" />
+<viz.data:MeasureDefinition name="Portugal" value="{Portugal}" />
+<viz.data:MeasureDefinition name="Slovak_Republic" value="{Slovak_Republic}" />
+<viz.data:MeasureDefinition name="Slovenia" value="{Slovenia}" />
+<viz.data:MeasureDefinition name="Spain" value="{Spain}" />
+<viz.data:MeasureDefinition name="Australia" value="{Australia}" />
+<viz.data:MeasureDefinition name="Canada" value="{Canada}" />
+<viz.data:MeasureDefinition name="China_P_R_Hong_Kong" value="{China_P_R_Hong_Kong}" />
+<viz.data:MeasureDefinition name="China_P_R_Macao" value="{China_P_R_Macao}" />
+<viz.data:MeasureDefinition name="Czech_Republic" value="{Czech_Republic}" />
+<viz.data:MeasureDefinition name="Denmark" value="{Denmark}" />
+<viz.data:MeasureDefinition name="Iceland" value="{Iceland}" />
+<viz.data:MeasureDefinition name="Israel" value="{Israel}" />
+<viz.data:MeasureDefinition name="Japan" value="{Japan}" />
+<viz.data:MeasureDefinition name="Korea_Republic_of" value="{Korea_Republic_of}" />
+<viz.data:MeasureDefinition name="New_Zealand" value="{New_Zealand}" />
+<viz.data:MeasureDefinition name="Norway" value="{Norway}" />
+<viz.data:MeasureDefinition name="Singapore" value="{Singapore}" />
+<viz.data:MeasureDefinition name="Sweden" value="{Sweden}" />
+<viz.data:MeasureDefinition name="Switzerland" value="{Switzerland}" />
+<viz.data:MeasureDefinition name="United_Kingdom" value="{United_Kingdom}" />
+<viz.data:MeasureDefinition name="United_States" value="{United_States}" />
+<viz.data:MeasureDefinition name="Emerging_and_Developing_Economies" value="{Emerging_and_Developing_Economies}" />
+<viz.data:MeasureDefinition name="Emerging_and_Developing_Asia" value="{Emerging_and_Developing_Asia}" />
+<viz.data:MeasureDefinition name="Bangladesh" value="{Bangladesh}" />
+<viz.data:MeasureDefinition name="Bhutan" value="{Bhutan}" />
+<viz.data:MeasureDefinition name="Brunei_Darussalam" value="{Brunei_Darussalam}" />
+<viz.data:MeasureDefinition name="Cambodia" value="{Cambodia}" />
+<viz.data:MeasureDefinition name="China_P_R_Mainland" value="{China_P_R_Mainland}" />
+<viz.data:MeasureDefinition name="Fiji" value="{Fiji}" />
+<viz.data:MeasureDefinition name="India" value="{India}" />
+<viz.data:MeasureDefinition name="Indonesia" value="{Indonesia}" />
+<viz.data:MeasureDefinition name="Lao_Peoples_Democratic_Republic" value="{Lao_Peoples_Democratic_Republic}" />
+<viz.data:MeasureDefinition name="Malaysia" value="{Malaysia}" />
+<viz.data:MeasureDefinition name="Maldives" value="{Maldives}" />
+<viz.data:MeasureDefinition name="Mongolia" value="{Mongolia}" />
+<viz.data:MeasureDefinition name="Myanmar" value="{Myanmar}" />
+<viz.data:MeasureDefinition name="Nepal" value="{Nepal}" />
+<viz.data:MeasureDefinition name="Papua_New_Guinea" value="{Papua_New_Guinea}" />
+<viz.data:MeasureDefinition name="Philippines" value="{Philippines}" />
+<viz.data:MeasureDefinition name="Samoa" value="{Samoa}" />
+<viz.data:MeasureDefinition name="Solomon_Islands" value="{Solomon_Islands}" />
+<viz.data:MeasureDefinition name="Sri_Lanka" value="{Sri_Lanka}" />
+<viz.data:MeasureDefinition name="Thailand" value="{Thailand}" />
+<viz.data:MeasureDefinition name="Tonga" value="{Tonga}" />
+<viz.data:MeasureDefinition name="Vanuatu" value="{Vanuatu}" />
+<viz.data:MeasureDefinition name="Vietnam" value="{Vietnam}" />
+<viz.data:MeasureDefinition name="Europe" value="{Europe}" />
+<viz.data:MeasureDefinition name="Emerging_and_Developing_Europe" value="{Emerging_and_Developing_Europe}" />
+<viz.data:MeasureDefinition name="Albania" value="{Albania}" />
+<viz.data:MeasureDefinition name="Bosnia_and_Herzegovina" value="{Bosnia_and_Herzegovina}" />
+<viz.data:MeasureDefinition name="Bulgaria" value="{Bulgaria}" />
+<viz.data:MeasureDefinition name="Croatia" value="{Croatia}" />
+<viz.data:MeasureDefinition name="Hungary" value="{Hungary}" />
+<viz.data:MeasureDefinition name="Kosovo" value="{Kosovo}" />
+<viz.data:MeasureDefinition name="Macedonia_FYR" value="{Macedonia_FYR}" />
+<viz.data:MeasureDefinition name="Montenegro" value="{Montenegro}" />
+<viz.data:MeasureDefinition name="Poland" value="{Poland}" />
+<viz.data:MeasureDefinition name="Romania" value="{Romania}" />
+<viz.data:MeasureDefinition name="Serbia_Republic_of" value="{Serbia_Republic_of}" />
+<viz.data:MeasureDefinition name="Turkey" value="{Turkey}" />
+<viz.data:MeasureDefinition name="CIS" value="{CIS}" />
+<viz.data:MeasureDefinition name="Armenia" value="{Armenia}" />
+<viz.data:MeasureDefinition name="Azerbaijan" value="{Azerbaijan}" />
+<viz.data:MeasureDefinition name="Belarus" value="{Belarus}" />
+<viz.data:MeasureDefinition name="Georgia" value="{Georgia}" />
+<viz.data:MeasureDefinition name="Kazakhstan" value="{Kazakhstan}" />
+<viz.data:MeasureDefinition name="Kyrgyz_Republic" value="{Kyrgyz_Republic}" />
+<viz.data:MeasureDefinition name="Moldova" value="{Moldova}" />
+<viz.data:MeasureDefinition name="Russia" value="{Russia}" />
+<viz.data:MeasureDefinition name="Tajikistan" value="{Tajikistan}" />
+<viz.data:MeasureDefinition name="Ukraine" value="{Ukraine}" />
+<viz.data:MeasureDefinition name="Middle_East_North_Africa_Afghanistan_and_Pakistan" value="{Middle_East_North_Africa_Afghanistan_and_Pakistan}" />
+<viz.data:MeasureDefinition name="Algeria" value="{Algeria}" />
+<viz.data:MeasureDefinition name="Bahrain_Kingdom_of" value="{Bahrain_Kingdom_of}" />
+<viz.data:MeasureDefinition name="Djibouti" value="{Djibouti}" />
+<viz.data:MeasureDefinition name="Egypt" value="{Egypt}" />
+<viz.data:MeasureDefinition name="Iran_Islamic_Republic_of" value="{Iran_Islamic_Republic_of}" />
+<viz.data:MeasureDefinition name="Jordan" value="{Jordan}" />
+<viz.data:MeasureDefinition name="Kuwait" value="{Kuwait}" />
+<viz.data:MeasureDefinition name="Lebanon" value="{Lebanon}" />
+<viz.data:MeasureDefinition name="Libya" value="{Libya}" />
+<viz.data:MeasureDefinition name="Morocco" value="{Morocco}" />
+<viz.data:MeasureDefinition name="Oman" value="{Oman}" />
+<viz.data:MeasureDefinition name="Pakistan" value="{Pakistan}" />
+<viz.data:MeasureDefinition name="Qatar" value="{Qatar}" />
+<viz.data:MeasureDefinition name="Saudi_Arabia" value="{Saudi_Arabia}" />
+<viz.data:MeasureDefinition name="Sudan" value="{Sudan}" />
+<viz.data:MeasureDefinition name="Syrian_Arab_Republic" value="{Syrian_Arab_Republic}" />
+<viz.data:MeasureDefinition name="Tunisia" value="{Tunisia}" />
+<viz.data:MeasureDefinition name="West_Bank_and_Gaza" value="{West_Bank_and_Gaza}" />
+<viz.data:MeasureDefinition name="Yemen_Republic_of" value="{Yemen_Republic_of}" />
+<viz.data:MeasureDefinition name="Sub_Saharan_Africa" value="{Sub_Saharan_Africa}" />
+<viz.data:MeasureDefinition name="CEMAC" value="{CEMAC}" />
+<viz.data:MeasureDefinition name="Cameroon" value="{Cameroon}" />
+<viz.data:MeasureDefinition name="Central_African_Republic" value="{Central_African_Republic}" />
+<viz.data:MeasureDefinition name="Chad" value="{Chad}" />
+<viz.data:MeasureDefinition name="Congo_Republic_of" value="{Congo_Republic_of}" />
+<viz.data:MeasureDefinition name="Equatorial_Guinea" value="{Equatorial_Guinea}" />
+<viz.data:MeasureDefinition name="Gabon" value="{Gabon}" />
+<viz.data:MeasureDefinition name="West_African_Economic_and_Monetary_Union_WAEMU" value="{West_African_Economic_and_Monetary_Union_WAEMU}" />
+<viz.data:MeasureDefinition name="Benin" value="{Benin}" />
+<viz.data:MeasureDefinition name="Burkina_Faso" value="{Burkina_Faso}" />
+<viz.data:MeasureDefinition name="Cote_d_Ivoire" value="{Cote_d_Ivoire}" />
+<viz.data:MeasureDefinition name="Guinea_Bissau" value="{Guinea_Bissau}" />
+<viz.data:MeasureDefinition name="Mali" value="{Mali}" />
+<viz.data:MeasureDefinition name="Niger" value="{Niger}" />
+<viz.data:MeasureDefinition name="Senegal" value="{Senegal}" />
+<viz.data:MeasureDefinition name="Togo" value="{Togo}" />
+<viz.data:MeasureDefinition name="Botswana" value="{Botswana}" />
+<viz.data:MeasureDefinition name="Burundi" value="{Burundi}" />
+<viz.data:MeasureDefinition name="Cape_Verde" value="{Cape_Verde}" />
+<viz.data:MeasureDefinition name="Comoros" value="{Comoros}" />
+<viz.data:MeasureDefinition name="Ethiopia" value="{Ethiopia}" />
+<viz.data:MeasureDefinition name="Gambia_The" value="{Gambia_The}" />
+<viz.data:MeasureDefinition name="Ghana" value="{Ghana}" />
+<viz.data:MeasureDefinition name="Kenya" value="{Kenya}" />
+<viz.data:MeasureDefinition name="Lesotho" value="{Lesotho}" />
+<viz.data:MeasureDefinition name="Madagascar" value="{Madagascar}" />
+<viz.data:MeasureDefinition name="Malawi" value="{Malawi}" />
+<viz.data:MeasureDefinition name="Mauritius" value="{Mauritius}" />
+<viz.data:MeasureDefinition name="Mozambique" value="{Mozambique}" />
+<viz.data:MeasureDefinition name="Namibia" value="{Namibia}" />
+<viz.data:MeasureDefinition name="Nigeria" value="{Nigeria}" />
+<viz.data:MeasureDefinition name="Rwanda" value="{Rwanda}" />
+<viz.data:MeasureDefinition name="Seychelles" value="{Seychelles}" />
+<viz.data:MeasureDefinition name="Sierra_Leone" value="{Sierra_Leone}" />
+<viz.data:MeasureDefinition name="South_Africa" value="{South_Africa}" />
+<viz.data:MeasureDefinition name="Swaziland" value="{Swaziland}" />
+<viz.data:MeasureDefinition name="Tanzania" value="{Tanzania}" />
+<viz.data:MeasureDefinition name="Uganda" value="{Uganda}" />
+<viz.data:MeasureDefinition name="Zambia" value="{Zambia}" />
+<viz.data:MeasureDefinition name="Zimbabwe" value="{Zimbabwe}" />
+<viz.data:MeasureDefinition name="Western_Hemisphere" value="{Western_Hemisphere}" />
+<viz.data:MeasureDefinition name="Eastern_Caribbean_Currency_Union" value="{Eastern_Caribbean_Currency_Union}" />
+<viz.data:MeasureDefinition name="Anguilla" value="{Anguilla}" />
+<viz.data:MeasureDefinition name="Antigua_and_Barbuda" value="{Antigua_and_Barbuda}" />
+<viz.data:MeasureDefinition name="Dominica" value="{Dominica}" />
+<viz.data:MeasureDefinition name="Grenada" value="{Grenada}" />
+<viz.data:MeasureDefinition name="Montserrat" value="{Montserrat}" />
+<viz.data:MeasureDefinition name="St_Kitts_and_Nevis" value="{St_Kitts_and_Nevis}" />
+<viz.data:MeasureDefinition name="St_Lucia" value="{St_Lucia}" />
+<viz.data:MeasureDefinition name="St_Vincent_and_the_Grenadines" value="{St_Vincent_and_the_Grenadines}" />
+<viz.data:MeasureDefinition name="Argentina" value="{Argentina}" />
+<viz.data:MeasureDefinition name="Aruba" value="{Aruba}" />
+<viz.data:MeasureDefinition name="Bahamas_The" value="{Bahamas_The}" />
+<viz.data:MeasureDefinition name="Barbados" value="{Barbados}" />
+<viz.data:MeasureDefinition name="Belize" value="{Belize}" />
+<viz.data:MeasureDefinition name="Bolivia" value="{Bolivia}" />
+<viz.data:MeasureDefinition name="Brazil" value="{Brazil}" />
+<viz.data:MeasureDefinition name="Chile" value="{Chile}" />
+<viz.data:MeasureDefinition name="Colombia" value="{Colombia}" />
+<viz.data:MeasureDefinition name="Costa_Rica" value="{Costa_Rica}" />
+<viz.data:MeasureDefinition name="Dominican_Republic" value="{Dominican_Republic}" />
+<viz.data:MeasureDefinition name="Ecuador" value="{Ecuador}" />
+<viz.data:MeasureDefinition name="El_Salvador" value="{El_Salvador}" />
+<viz.data:MeasureDefinition name="Guatemala" value="{Guatemala}" />
+<viz.data:MeasureDefinition name="Guyana" value="{Guyana}" />
+<viz.data:MeasureDefinition name="Honduras" value="{Honduras}" />
+<viz.data:MeasureDefinition name="Jamaica" value="{Jamaica}" />
+<viz.data:MeasureDefinition name="Mexico" value="{Mexico}" />
+<viz.data:MeasureDefinition name="Nicaragua" value="{Nicaragua}" />
+<viz.data:MeasureDefinition name="Panama" value="{Panama}" />
+<viz.data:MeasureDefinition name="Paraguay" value="{Paraguay}" />
+<viz.data:MeasureDefinition name="Peru" value="{Peru}" />
+<viz.data:MeasureDefinition name="Suriname" value="{Suriname}" />
+<viz.data:MeasureDefinition name="Trinidad_and_Tobago" value="{Trinidad_and_Tobago}" />
+<viz.data:MeasureDefinition name="Uruguay" value="{Uruguay}" />
+<viz.data:MeasureDefinition name="Venezuela_Republica_Bolivariana_de" value="{Venezuela_Republica_Bolivariana_de}" />
+
+
+</viz.data:measures>
+</viz.data:FlattenedDataset>
+</viz:dataset>
+<!-- the feed items are required to define the mapping between the odata
+properties (values) and the axis (uid) -->
+<viz:feeds>
+<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Advanced_Economies,Euro_area,Belgium,Cyprus,Estonia,Finland,Germany,Greece,Ireland,Italy,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Portugal,Slovak_Republic,Slovenia,Spain,Australia,Canada,China_P_R_Hong_Kong,China_P_R_Macao,Czech_Republic,Denmark,Iceland,Israel,Japan,Korea_Republic_of,New_Zealand,Norway,Singapore,Sweden,Switzerland,United_Kingdom,United_States,Emerging_and_Developing_Economies,Emerging_and_Developing_Asia,Bangladesh,Bhutan,Brunei_Darussalam,Cambodia,China_P_R_Mainland,Fiji,India,Indonesia,Lao_Peoples_Democratic_Republic,Malaysia,Maldives,Mongolia,Myanmar,Nepal,Papua_New_Guinea,Philippines,Samoa,Solomon_Islands,Sri_Lanka,Thailand,Tonga,Vanuatu,Vietnam,Europe,Emerging_and_Developing_Europe,Albania,Bosnia_and_Herzegovina,Bulgaria,Croatia,Hungary,Kosovo,Macedonia_FYR,Montenegro,Poland,Romania,Serbia_Republic_of,Turkey,CIS,Armenia,Azerbaijan,Belarus,Georgia,Kazakhstan,Kyrgyz_Republic,Moldova,Russia,Tajikistan,Ukraine,Middle_East_North_Africa_Afghanistan_and_Pakistan,Algeria,Bahrain_Kingdom_of,Djibouti,Egypt,Iran_Islamic_Republic_of,Jordan,Kuwait,Lebanon,Libya,Morocco,Oman,Pakistan,Qatar,Saudi_Arabia,Sudan,Syrian_Arab_Republic,Tunisia,West_Bank_and_Gaza,Yemen_Republic_of,Sub_Saharan_Africa,CEMAC,Cameroon,Central_African_Republic,Chad,Congo_Republic_of,Equatorial_Guinea,Gabon,West_African_Economic_and_Monetary_Union_WAEMU,Benin,Burkina_Faso,Cote_d_Ivoire,Guinea_Bissau,Mali,Niger,Senegal,Togo,Botswana,Burundi,Cape_Verde,Comoros,Ethiopia,Gambia_The,Ghana,Kenya,Lesotho,Madagascar,Malawi,Mauritius,Mozambique,Namibia,Nigeria,Rwanda,Seychelles,Sierra_Leone,South_Africa,Swaziland,Tanzania,Uganda,Zambia,Zimbabwe,Western_Hemisphere,Eastern_Caribbean_Currency_Union,Anguilla,Antigua_and_Barbuda,Dominica,Grenada,Montserrat,St_Kitts_and_Nevis,St_Lucia,St_Vincent_and_the_Grenadines,Argentina,Aruba,Bahamas_The,Barbados,Belize,Bolivia,Brazil,Chile,Colombia,Costa_Rica,Dominican_Republic,Ecuador,El_Salvador,Guatemala,Guyana,Honduras,Jamaica,Mexico,Nicaragua,Panama,Paraguay,Peru,Suriname,Trinidad_and_Tobago,Uruguay,Venezuela_Republica_Bolivariana_de" />
+<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="ID" />
+</viz:feeds>
+</viz:VizFrame>
+</mvc:View>
