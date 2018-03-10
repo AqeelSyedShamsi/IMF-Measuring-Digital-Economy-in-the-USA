@@ -1,0 +1,43 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+
+                     xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page>
+
+  <content>
+
+    <html:div style="font-size:120%;">Double Exponential Smoothing model is suitable to model the time series with trend but without seasonality. In
+the model there are two kinds of smoothed quantities: smoothed signal and smoothed trend.
+<html:br></html:br>
+PAL provides two methods of double exponential smoothing: Holt's linear exponential smoothing and additive
+damped trend Holt's linear exponential smoothing. The Holt’s linear exponential smoothing displays a
+constant trend indefinitely into the future. Empirical evidence shows that the Holt's linear method tends to
+over-forecast. A parameter that is used to damp the trend could improve the situation.<html:br></html:br>For single exponential smoothing, let St be the smoothed value for the t-th time period. Mathematically:
+<html:br></html:br>
+
+<html:b>Holt's Linear Exponential Smoothing</html:b><html:br></html:br>
+Let St and bt be the smoothed value and smoothed trend for the (t+1)-th time period, respectively. The following rules are satisfied:
+<html:br></html:br>
+S0 = x0 <html:br></html:br>
+b0 = x1 – x0 <html:br></html:br>
+St = αxt + (1 – α) (St-1 + bt-1) <html:br></html:br>
+bt = β (St – St–1) + (1 – β) bt-1 <html:br></html:br> Where α, β∈(0,1) are two user specified parameters. The model can be understood as two coupled Single
+Exponential Smoothing models, and forecast can be made by the following equation: <html:br></html:br>
+FT+m = ST + mbT <html:br></html:br>
+
+<html:b>Prerequisites</html:b>
+<html:p> ●  No missing or null data in the inputs. The algorithm will issue errors when encountering null values.<html:br></html:br>
+ ●  The data is numeric, not categorical.<html:br></html:br>
+
+</html:p>
+
+<html:b>Procedure Generation</html:b>
+<html:p> CALL SYS.AFLLANG_WRAPPER_PROCEDURE_CREATE (‘AFLPAL’, ‘DOUBLESMOOTH’, ‘schema_name’, 'procedure_name', signature_table);</html:p>
+
+</html:div>
+
+  </content>
+
+</Page>
+
+</mvc:View>
