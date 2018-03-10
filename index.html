@@ -1,0 +1,1117 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<title>International Monetary Fund</title>
+		<script src="/sap/ui5/1/resources/sap-ui-core.js"
+			type="text/javascript"
+			id="sap-ui-bootstrap"
+			data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.m, sap.viz, sap.ui.layout, sap.ui.core"
+			data-sap-ui-theme="sap_goldreflection">
+		</script>
+
+		<script>
+			//var c = sap.ui.commons; /* shorthand */
+
+
+			//CREATE SHELL COMPONENT
+			//Defines application icon and title
+			//Defines behaviour for logout, search and create feed functions
+			var oShell = new sap.ui.ux3.Shell("myShell", {
+				appIcon:"images/imflogo.png",
+				appIconTooltip:"IMF",
+				appTitle:"International Monetary Fund",
+				logout:function(){
+					alert("Logout Button has been clicked.\nThe application can now do whatever is required.\nThis example page will just clear the screen.");
+					oShell.forceInvalidation();
+					oShell.destroy();
+					sap.ui.getCore().applyChanges();
+					jQuery(document.body).html("<span>Logout had been pressed, screen has been cleared.</span>");
+				},
+				search:function(oEvent){
+					alert("Search triggered: " + oEvent.getParameter("text"));
+				},
+				feedSubmit:function(oEvent){
+					alert("Feed entry submitted: " + oEvent.getParameter("text"));
+				}
+			});
+
+			//Shell is now created, but is not active before it is bound to an HTML element.
+			//This will be done in the end with function oShell.placeAt
+
+
+			//HEADER ITEM
+			//Add a simple header item (header items can be much more complex, for example may contain sub-menus)
+				oShell.addHeaderItem(new sap.ui.commons.TextView({text:"Username",tooltip:"GBI_001"}));
+           //oShell.addHeaderItem(new sap.ui.commons.TextView({text:"Username",tooltip:"GBI_001"}));
+           oShell.addHeaderItem(new sap.ui.commons.Button({Key:"Help",text:"Help",tooltip:"Help",press:function(){
+				openDialog();
+			}}));
+			function openDialog() {
+	var oDialog1 = new sap.ui.commons.Dialog();
+	oDialog1.setTitle("Report Incident");
+	var oText = new sap.ui.commons.TextField('input1');
+	//oDialog1.setValue("Some Text");
+	oDialog1.addContent(oText);
+	// sap.m.URLHelper.triggerEmail("spoorthin26@gmail.com", "sample Subject", "Hi");
+	oDialog1.addButton(new sap.ui.commons.Button({text: "send", press:function(){
+	    
+	    oDialog1.close();}}));
+	   // oDialog1.sap.m.URLHelper.triggerEmail("spoorthin26@gmail.com", "Report Incident", "User reported a problem");
+	oDialog1.open();
+};
+                //oShell.addHeaderItem(new sap.ui.commons.Link({text:"Homepage", href:"http://www.sap.com"}));
+          ///oShell.addHeaderItem(new sap.ui.commons.MenuButton({
+		//		text:"Help",
+			//	tooltip:"Help Menu",
+			//	menu:new sap.ui.commons.Menu("menu1",{
+				//	items:[
+					//	new sap.ui.commons.MenuItem("menuitem1",{text:"Help"}),
+						//new sap.ui.commons.MenuItem("menuitem2",{text:"Admin Contact-madhuri.hebbale@st.ovgu.de"}),
+					//	new sap.ui.commons.MenuItem("menuitem3",{text:"About"})
+				//	]
+			//	})
+		//	}));
+      
+		
+              
+			//NAVIGATION
+			//Create the navigation structure through Workset items. The key is used later to refer to the
+// 			oShell.addWorksetItem(new sap.ui.ux3.NavigationItem("wi_news", {key:"wi_news",text:"Descriptive Algorithms",subItems:[
+// 				new sap.ui.ux3.NavigationItem("Multivarstat", {key:"Multivarstat",text:"Multivariate"}),
+// 				new sap.ui.ux3.NavigationItem("Multivarstat_INF", {key:"Multivarstat_INF",text:"Multivariate Information"}),
+// 				new sap.ui.ux3.NavigationItem("Multivarstat_EXP", {key:"Multivarstat_EXP",text:"Export of Goods"}),
+			//	new sap.ui.ux3.NavigationItem("Multivarstat_IMP", {key:"Multivarstat_IMP",text:"Import of Goods"}),
+			//	new sap.ui.ux3.NavigationItem("Multivarstat_GDP", {key:"Multivarstat_GDP",text:"GDP"}),
+			//Trend Algo
+				// new sap.ui.ux3.NavigationItem("Trend_GDP", {key:"Trend_GDP",text:"Trend_GDP"}),
+				// new sap.ui.ux3.NavigationItem("Trend_INF", {key:"Trend_INF",text:"Trend_Information"}),
+				// new sap.ui.ux3.NavigationItem("Trend_EXP", {key:"Trend_EXP",text:"Trend_Export Of Goods"}),
+				// new sap.ui.ux3.NavigationItem("Trend_IMP", {key:"Trend_IMP",text:"Trend_Import Of Goods"}),
+				// new sap.ui.ux3.NavigationItem("Trend_Consumer", {key:"Trend_Consumer",text:"Trend_Consumer Price"}),
+			//Seasonality Algo
+// 		new sap.ui.ux3.NavigationItem("Season_GDP", {key:"Season_GDP",text:"Seasonality_GDP"}),
+// 				new sap.ui.ux3.NavigationItem("Season_INF", {key:"Season_INF",text:"Seasonality_Information"}),
+// 				new sap.ui.ux3.NavigationItem("Season_EXP", {key:"Season_EXP",text:"Seasonality_Export Of Goods"}),
+// 				new sap.ui.ux3.NavigationItem("Season_IMP", {key:"Season_IMP",text:"Seasonality_Import Of Goods"}
+// 				)]}));
+			oShell.addWorksetItem(new sap.ui.ux3.NavigationItem("graphs_Multivarstat", {key:"graphs_Multivarstat",text:"Descriptive Algorithms",subItems:[
+								new sap.ui.ux3.NavigationItem("Graph_Multivarstat_INF", {key:"Graph_Multivarstat_INF",text:"Multivarstate Inflation"}),
+
+				new sap.ui.ux3.NavigationItem("Graph_Multivarstat", {key:"Graph_Multivarstat",text:"Multivariate CP&PP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Multivarstat_EXP", {key:"Graph_Multivarstat_EXP",text:"Multivarstate Export of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Multivarstat_IMP", {key:"Graph_Multivarstat_IMP",text:"Multivarstate Import of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Multivarstat_GDP", {key:"Graph_Multivarstat_GDP",text:"Multivarstate GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Trend_GDP", {key:"Graph_Trend_GDP",text:"Trend GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Trend_INF", {key:"Graph_Trend_INF",text:"Trend Inflation"}),
+				new sap.ui.ux3.NavigationItem("Graph_Trend_EXP", {key:"Graph_Trend_EXP",text:"Trend Export Of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Trend_IMP", {key:"Graph_Trend_IMP",text:"Trend Import Of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Trend_Consumer", {key:"Graph_Trend_Consumer",text:"Trend Consumer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_Seasonality_EXP", {key:"Graph_Seasonality_EXP",text:"Seasonality Export Of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Seasonality_GDP", {key:"Graph_Seasonality_GDP",text:"Seasonality GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Seasonality_INF", {key:"Graph_Seasonality_INF",text:"Seasonality Inflation"}),
+				new sap.ui.ux3.NavigationItem("Graph_Seasonality_IMP", {key:"Graph_Seasonality_IMP",text:"Seasonality Import Of Goods"})
+				
+				]}));
+//           oShell.addWorksetItem(new sap.ui.ux3.NavigationItem("Predictive_Algorithms", {key:"Predictive_Algorithms",text:"Predictive Algorithms",subItems:[
+// 			new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_CP", {key:"ARIMA_RESULTS_CP",text:"ARIMA_RESULTS_CP"}),
+// 				new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_EG", {key:"ARIMA_RESULTS_EG",text:"ARIMA_RESULTS_EG"}),
+// 				new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_GDP", {key:"ARIMA_RESULTS_GDP",text:"ARIMA_RESULTS_GDP"}),
+// 				new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_IG", {key:"ARIMA_RESULTS_IG",text:"ARIMA_RESULTS_IG"}),
+// 				new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_IR", {key:"ARIMA_RESULTS_IR",text:"ARIMA_RESULTS_IR"}),
+// 				new sap.ui.ux3.NavigationItem("ARIMA_RESULTS_PP", {key:"ARIMA_RESULTS_PP",text:"ARIMA_RESULTS_PP"}),
+// 			//double smoothing
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_CP", {key:"Results_Double_Smoothing_CP",text:"Results_Double_Smoothing_CP"}),
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_EG", {key:"Results_Double_Smoothing_EG",text:"Results_Double_Smoothing_EG"}),
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_GDP", {key:"Results_Double_Smoothing_GDP",text:"Results_Double_Smoothing_GDP"}),
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_IG", {key:"Results_Double_Smoothing_IG",text:"Results_Double_Smoothing_IG"}),
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_IR", {key:"Results_Double_Smoothing_IR",text:"Results_Double_Smoothing_IR"}),
+// 				new sap.ui.ux3.NavigationItem("Results_Double_Smoothing_PP", {key:"Results_Double_Smoothing_PP",text:"Results_Double_Smoothing_PP"})
+// 			]}));
+			
+			oShell.addWorksetItem(new sap.ui.ux3.NavigationItem("Graph_Predictive_Algorithms", {key:"Graph_Predictive_Algorithms",text:"Predictive Algorithms",subItems:[
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_CP", {key:"Graph_ARIMA_RESULTS_CP",text:"ARIMA Consumer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_EG", {key:"Graph_ARIMA_RESULTS_EG",text:"ARIMA Export of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_GDP", {key:"Graph_ARIMA_RESULTS_GDP",text:"ARIMA GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_IG", {key:"Graph_ARIMA_RESULTS_IG",text:"ARIMA Import of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_IR", {key:"Graph_ARIMA_RESULTS_IR",text:"ARIMA Inflation Rate"}),
+				new sap.ui.ux3.NavigationItem("Graph_ARIMA_RESULTS_PP", {key:"Graph_ARIMA_RESULTS_PP",text:"ARIMA Producer Price"}),
+		//double smoothing
+		new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_EG", {key:"Graph_Results_Double_Smoothing_EG",text:"Smoothing Export of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_CP", {key:"Graph_Results_Double_Smoothing_CP",text:"Smoothing Consumer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_GDP", {key:"Graph_Results_Double_Smoothing_GDP",text:"Smoothing GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_IG", {key:"Graph_Results_Double_Smoothing_IG",text:"Smoothing Import of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_IR", {key:"Graph_Results_Double_Smoothing_IR",text:"Smoothing Inflation Rate"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Double_Smoothing_PP", {key:"Graph_Results_Double_Smoothing_PP",text:"Smoothing Producer Price"}),
+				//Browne
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_CP", {key:"Graph_BROWNEXPSMOOTH_RESULTS_CP",text:"BROWNEXPSMOOTH Consumer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_EG", {key:"Graph_BROWNEXPSMOOTH_RESULTS_EG",text:"BROWNEXPSMOOTH Export of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_GDP", {key:"Graph_BROWNEXPSMOOTH_RESULTS_GDP",text:"BROWNEXPSMOOTH GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_IG", {key:"Graph_BROWNEXPSMOOTH_RESULTS_IG",text:"BROWNEXPSMOOTH Import of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_IR", {key:"Graph_BROWNEXPSMOOTH_RESULTS_IR",text:"BROWNEXPSMOOTH Inflation Rate"}),
+				new sap.ui.ux3.NavigationItem("Graph_BROWNEXPSMOOTH_RESULTS_PP", {key:"Graph_BROWNEXPSMOOTH_RESULTS_PP",text:"BROWNEXPSMOOTH Producer Price"}),
+            //Tripple smoothing 
+            new sap.ui.ux3.NavigationItem("Graph_Results_Triple_Exponential_Smoothing_CP", {key:"Graph_Results_Triple_Exponential_Smoothing_CP",text:"Triple Exponential Smoothing consumer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_Results_Triple_Exponential_Smoothing_PP", {key:"Graph_Results_Triple_Exponential_Smoothing_PP",text:"Triple Exponential Smoothing Producer Price"}),
+				new sap.ui.ux3.NavigationItem("Graph_Result_Triple_Smoothing_EG", {key:"Graph_Result_Triple_Smoothing_EG",text:"Triple Smoothing Export of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Result_Triple_Smoothing_GDP", {key:"Graph_Result_Triple_Smoothing_GDP",text:"Triple Smoothing GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_Result_Triple_Smoothing_IG", {key:"Graph_Result_Triple_Smoothing_IG",text:"Triple Smoothing Import of Goods"}),
+				new sap.ui.ux3.NavigationItem("Graph_Result_Triple_Smoothing_IR", {key:"Graph_Result_Triple_Smoothing_IR",text:"Triple Smoothing Inflation Rate"}),
+           //linear regration
+            new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_CP", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_CP",text:"Linear Regression Seasonal Adjust CP"}),
+					new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_EG", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_EG",text:"Linear Regression Seasonal Adjust EG"}),
+				new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_GDP", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_GDP",text:"Linear Regression Seasonal Adjust GDP"}),
+				new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_IG", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_IG",text:"Linear Regression Seasonal Adjust IG"}),
+				new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_IR", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_IR",text:"Linear Regression Seasonal Adjust IR"}),
+				new sap.ui.ux3.NavigationItem("Graph_LRWITHSEASONALADJUST_RESULTS_PP", {key:"Graph_LRWITHSEASONALADJUST_RESULTS_PP",text:"Linear Regression Seasonal Adjust PP"})
+           
+			]}));
+			
+			oShell.addWorksetItem(new sap.ui.ux3.NavigationItem("User_Guide", {key:"User_Guide",text:"User Guide",subItems:[
+				new sap.ui.ux3.NavigationItem("Multivariate_Statistics", {key:"Multivariate_Statistics",text:"Multivariate Statistics"}),
+			new sap.ui.ux3.NavigationItem("Trend", {key:"Trend",text:"Trend Test"}),
+			new sap.ui.ux3.NavigationItem("Seasonality", {key:"Seasonality",text:"Seasonality Test"}),
+			new sap.ui.ux3.NavigationItem("ARIMA", {key:"ARIMA",text:"ARIMA"}),	
+			new sap.ui.ux3.NavigationItem("BROWN", {key:"BROWN",text:"Brown Exponential Smoothing"}),	
+			new sap.ui.ux3.NavigationItem("LINEAR", {key:"LINEAR",text:"Linear Regression Seasonal Adjust"}),
+           	//new sap.ui.ux3.NavigationItem("SINGLE", {key:"SINGLE",text:"Single Exponential Smoothing"}),
+           	new sap.ui.ux3.NavigationItem("DOUBLE", {key:"DOUBLE",text:"Double Exponential Smoothing"}),
+           	new sap.ui.ux3.NavigationItem("TRIPLE", {key:"TRIPLE",text:"Triple Exponential Smoothing"}),
+			]}));
+			//When a navigation item is selected, this function is called.
+			//it will retrieve the content based on the selected navigation item
+			oShell.attachWorksetItemSelected(function(oEvent) {
+				var itemKey = oEvent.getParameter("key");
+				oShell.setContent(getContent(itemKey));
+			});
+			
+
+
+			//TOOL POPUPS
+			//Created through new sap.ui.ux3.ToolPopup and oShell.addToolPopup();
+			//Skipped here in order to keep it simple
+
+			//PANE BAR
+		//	oShell.addPaneBarItem(new sap.ui.core.Item("pane_feed",{text:"Feed"}));
+			oShell.addPaneBarItem(new sap.ui.core.Item("pane_people",{text:"Contributors"}));
+
+			//When a pane is clicked on, this method is called in order to retrieve the content
+			oShell.attachPaneBarItemSelected(function(oEvent) {
+				var paneId = oEvent.mParameters.id;
+				oShell.setPaneContent(getPaneContent(paneId));
+			});
+
+
+			//CONTENT
+			//This section is used for defining the content based on selected navigation item
+			//Note that normally the content for each navigation item(workset item) would be defined in a separate file
+
+			var aContent = {};//we cache the content in this object
+
+			//Return content based on the id of the navigation item(workset item)
+			//This method is called for the event handler of the navigation (set up from oShell.attachWorksetItemSelected)
+			function getContent(id) {
+				//check if the content is already created
+				if (!aContent[id]) {
+					//if not cached, define content based on id of navigation item (workset item)
+					 if (id == "Multivarstat") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_simple",        
+                        // location and name of the view        
+                         viewName:"content.Multivarstat",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                });     }
+                    
+                   else if (id == "Multivarstat_INF") {
+					     sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_INF",        
+     // location and name of the view        
+     viewName:"content.Multivarstat_INF",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     });     } 
+     
+                    else if (id == "Multivarstat_EXP") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_EXP",        
+     // location and name of the view        
+     viewName:"content.Multivarstat_Results_EXP_TBL",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+                else if (id == "Multivariate_Statistics") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_UG",        
+     // location and name of the view        
+     viewName:"content.Multivariate_Statistics",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+        else if (id == "Trend") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_TR",        
+     // location and name of the view        
+     viewName:"content.Trend",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+     else if (id == "Seasonality") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_ST",        
+     // location and name of the view        
+     viewName:"content.Seasonality",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+                    else if (id == "ARIMA") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_ARIMA",        
+     // location and name of the view        
+     viewName:"content.ARIMA",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+     else if (id == "BROWN") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_BROWN",        
+     // location and name of the view        
+     viewName:"content.BROWN",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+     else if (id == "LINEAR") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_LINEAR",        
+     // location and name of the view        
+     viewName:"content.LINEAR",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+      else if (id == "SINGLE") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_SINGLE",        
+     // location and name of the view        
+     viewName:"content.SINGLE",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+     else if (id == "DOUBLE") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_DOUBLE",        
+     // location and name of the view        
+     viewName:"content.DOUBLE",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+     else if (id == "TRIPLE") {
+						 sap.ui.localResources("content");
+						aContent[id] = sap.ui.view({          
+     // unique identifier for this instance        
+     id:"idmain_TRIPLE",        
+     // location and name of the view        
+     viewName:"content.TRIPLE",        
+     // type of the view, i.e. XML, JavaScript, JSON...        
+     type:sap.ui.core.mvc.ViewType.XML        
+     }); }
+                    else if (id == "Graph_Multivarstat") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_multivarstat",        
+                        // location and name of the view        
+                         viewName:"content.Overview",
+                        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+            
+                   else if (id == "Graph_Multivarstat_INF") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_multivarstat_INF",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Multivarstat_INF",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				   
+				    else if (id == "Graph_Multivarstat_EXP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_multivarstat_EXP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Multivarstat_Results_EXP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				    
+				    else if (id == "Multivarstat_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_multivarstat_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Multivarstat_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Graph_Multivarstat_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_multivarstat_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Multivarstat_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				    
+				   else if (id == "Multivarstat_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_multivarstat_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Multivarstat_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Graph_Multivarstat_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_multivarstat_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Multivarstat_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                   else if (id == "Trend_EXP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_trend_EXP",        
+                        // location and name of the view        
+                         viewName:"content.Trend_Results_EXP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                   
+                    else if (id == "Trend_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_trend_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Trend_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Trend_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_trend_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Trend_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                   else if (id == "Trend_INF") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_trend_INF",        
+                        // location and name of the view        
+                         viewName:"content.Trend_Results_INF_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Graph_Trend_EXP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_Trend_EXP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Trend_Results_EXP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Graph_Trend_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_Trend_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Trend_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Graph_Trend_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_Trend_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Trend_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Graph_Trend_INF") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_Trend_INF",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Trend_Results_INF_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Graph_Trend_Consumer") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_graph_Trend_Consumer",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Trend_Results_Consumer_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Trend_Consumer") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_trend_Consumer",        
+                        // location and name of the view        
+                         viewName:"content.Trend_Results_Consumer_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    
+                    else if (id == "Season_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_season_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Seasonality_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    
+                   else if (id == "Season_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_season_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Seasonality_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					
+					else if (id == "Season_INF") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_season_INF",        
+                        // location and name of the view        
+                         viewName:"content.Seasonality_Results_INF_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+            
+				else if (id == "Season_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_season_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Seasonality_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+             
+                   else if (id == "Season_EXP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_season_EXP",        
+                        // location and name of the view        
+                         viewName:"content.Seasonality_Results_EXP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Graph_Seasonality_EXP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_season_EXP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Seasonality_Results_EXP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                   
+                    else if (id == "Graph_Seasonality_IMP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_season_IMP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Seasonality_Results_IMP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Graph_Seasonality_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_season_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Seasonality_Results_GDP_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Graph_Seasonality_INF") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_season_INF",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Seasonality_Results_INF_TBL",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    
+               else if (id == "ARIMA_RESULTS_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_CP",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                   else if (id == "ARIMA_RESULTS_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_IR",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    
+                    
+                   else if (id == "ARIMA_RESULTS_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_PP",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                  else if (id == "ARIMA_RESULTS_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_EG",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                   else if (id == "ARIMA_RESULTS_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_IG",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                   else if (id == "ARIMA_RESULTS_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_ARIMA_RESULTS_GDP",        
+                        // location and name of the view        
+                         viewName:"content.ARIMA_RESULTS_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_CP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_IR",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_PP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_EG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_ARIMA_RESULTS_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_ARIMA_RESULTS_IG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_ARIMA_RESULTS_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                     //double smoothing
+                    else if (id == "Results_Double_Smoothing_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Results_Double_Smoothing_CP",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                     else if (id == "Results_Double_Smoothing_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Results_Double_Smoothing_IG",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Results_Double_Smoothing_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Results_Double_Smoothing_EG",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Results_Double_Smoothing_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Results_Double_Smoothing_PP",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Results_Double_Smoothing_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Results_Double_Smoothing_IR",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     
+                    else if (id == "Results_Double_Smoothing_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Result_Double_Smoothing_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Results_Double_Smoothing_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    
+                   else if (id == "Graph_Results_Double_Smoothing_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_CP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_Results_Double_Smoothing_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_PP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				else if (id == "Graph_Results_Double_Smoothing_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_EG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				
+				else if (id == "Graph_Results_Double_Smoothing_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_Results_Double_Smoothing_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_IG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_Results_Double_Smoothing_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Double_Smoothing_IR",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Double_Smoothing_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+				     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_CP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_IR",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_IG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_EG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                     else if (id == "Graph_BROWNEXPSMOOTH_RESULTS_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_BROWNEXPSMOOTH_RESULTS_PP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_BROWNEXPSMOOTH_RESULTS_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+//tripple smoothing
+                     else if (id == "Graph_Results_Triple_Exponential_Smoothing_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Triple_Exponential_Smoothing_CP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Triple_Exponential_Smoothing_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                     else if (id == "Graph_Results_Triple_Exponential_Smoothing_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Results_Triple_Exponential_Smoothing_PP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Results_Triple_Exponential_Smoothing_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                     else if (id == "Graph_Result_Triple_Smoothing_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Result_Triple_Smoothing_EG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Result_Triple_Smoothing_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                     else if (id == "Graph_Result_Triple_Smoothing_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Result_Triple_Smoothing_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Result_Triple_Smoothing_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                     else if (id == "Graph_Result_Triple_Smoothing_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Result_Triple_Smoothing_IG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Result_Triple_Smoothing_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                     else if (id == "Graph_Result_Triple_Smoothing_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Result_Triple_Smoothing_IR",        
+                        // location and name of the view        
+                         viewName:"content.Graph_Result_Triple_Smoothing_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+
+                   // linear regration
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_EG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_LRWITHSEASONALADJUST_RESULTS_EG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_EG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_IR") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_LRWITHSEASONALADJUST_RESULTS_IR",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_IR",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_GDP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_LRWITHSEASONALADJUST_RESULTS_GDP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_GDP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_CP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_Graph_LRWITHSEASONALADJUST_RESULTS_CP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_CP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_PP") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_LRWITHSEASONALADJUST_RESULTS_PP",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_PP",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+                    else if (id == "Graph_LRWITHSEASONALADJUST_RESULTS_IG") {
+					    sap.ui.localResources("content");    
+						aContent[id] = sap.ui.view({          
+                         // unique identifier for this instance        
+                         id:"idmain_Graph_LRWITHSEASONALADJUST_RESULTS_IG",        
+                        // location and name of the view        
+                         viewName:"content.Graph_LRWITHSEASONALADJUST_RESULTS_IG",        
+                         // type of the view, i.e. XML, JavaScript, JSON...        
+                         type:sap.ui.core.mvc.ViewType.XML        
+                     });     }
+					else {
+						aContent[id] = null;
+					} 
+				}
+				return aContent[id];
+			}
+
+			//Return content for pane based on the id of it
+			function getPaneContent(id) {
+				if (!aContent[id]) {
+				// 	if (id == "pane_feed") {
+				// 		aContent[id] = new sap.ui.commons.TextView({text:"This is the content of pange with id " + id});
+				// 	}  
+					if (id == "pane_people") {
+					    var oPanel2 = new sap.ui.commons.Panel({width: "202px"});
+					       
+					  oPanel2.addContent ( new sap.ui.commons.Image({src: "images/madhu.jpg",width: "100px",height:"115px"}));
+					    oPanel2.addContent ( new sap.ui.commons.TextView({text:"Madhuri"}));
+					    oPanel2.addContent ( new sap.ui.commons.Image({src: "images/majed-ali.jpg",width: "100px",height:"115px"}));
+						oPanel2.addContent ( new sap.ui.commons.TextView({text:"Majed Ali"}));
+					    oPanel2.addContent ( new sap.ui.commons.Image({src: "images/spoo1.jpg", width: "100px",height:"115px"}));
+					      oPanel2.addContent ( new sap.ui.commons.TextView({text:"   Spoorthi"}));
+						 oPanel2.addContent ( new sap.ui.commons.Image({src: "images/aqeel.jpg",width: "100px",height:"115px"}));
+						 oPanel2.addContent ( new sap.ui.commons.TextView({text:"   Aqeel"}));
+					 
+						
+						 //oPanel2.placeAt("pane_people");
+						 aContent[id]=oPanel2;
+					}
+				}
+				return aContent[id];
+			}
+
+
+			//Initialize the default content
+			oShell.setContent(getContent("Graph_Multivarstat_INF"));
+
+			//Make the shell visible by binding it to a DIV in the HTML code
+			oShell.placeAt("shellArea");
+		</script>
+
+	</head>
+	<body  class="sapUiBody" role="application">
+
+		<!-- THIS IS THE DIV FOR WHICH WE BIND OUR SHELL COMPONENT-->
+		<div id="shellArea"></div>
+
+	</body>
+</html>
